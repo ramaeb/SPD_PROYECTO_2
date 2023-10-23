@@ -248,7 +248,7 @@ El adc del arduino devuelve un valor entre 0 y 1023
 Entonces si el arduino devuelve en una escala de 5v 1023 valores, la cuenta seria:
 - TEMPERATURA = TEMPERATURA_LEIDA *(5000/1024)
 
-![Tinkercad](./img/numeros_primos.png)
+![Tinkercad](./img/sensor_temperatura.png)
 
 ~~~C
 void loop()
