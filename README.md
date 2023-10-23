@@ -240,4 +240,32 @@ Aplicando el uso de pwm subimos la velocidad del motor mostrando numeros del 0 a
 
 - [LINK AL PROYECTO MOTOR ](https://www.tinkercad.com/things/ezhMjHselsI?sharecode=eaGsicF5UsC8CU-rVPNWVja8EhKVKGN6dtYL74VTGeU)
 
+## Sensor de temperatura
+El sensor de temperatura recibe la temperatura y la devuelve por un pin, este pin conectado a una entrada analogica del arduino y por medio de unas cuentas
+podemos realizar la conversión de estos valores y mostrar la temperatura del sensor en el display.
+
+~~~C
+void loop()
+{
+ 
+  
+  //LECTURA DEL SENSOR
+  tempC = analogRead(SENSOR); 
+  float voltaje = tempC * (5000 / 1024.0);
+  float temperatura = (voltaje - 500) / 10;
+  if(temperatura > 100)
+  {
+    temperatura = 0;
+  
+  }
+  cuentaDispUnidad(temperatura);
+  digitalWrite(GND_UNI,LOW);
+  delay(10);
+  digitalWrite(GND_UNI,HIGH);
+  cuentaDispDec(temperatura);
+  digitalWrite(GND_DEC,LOW);
+  delay(10);
+  digitalWrite(GND_DEC,HIGH);
+}
+~~~
 
