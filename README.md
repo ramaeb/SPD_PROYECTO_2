@@ -1,4 +1,4 @@
-# SPD_PROYECTO_2 parte 1
+# SPD_PROYECTO_2
 Proyecto numero 2 para SPD, usando tinkercad y arduino (C++): CONTADOR CON DOS DISPLAY DE 7 SEGMENTOS.
 ## Integrantes
 - Ramiro Bianucci
@@ -140,6 +140,12 @@ int cuentaDispUnidad(int num){
   
   	}
 ~~~
+# Modificaciones y mejoras
+## 1- Modificación con switch para numeros primos.
+La principal modificación hecha en el contador fue agregar un switch, el cual alterna entre un contador normal y un contador de numeros primos.
+El contador de numeros primos realiza la misma función que el contador original solo que con el botón suma mostraría los numeros primos en el rango 0 a 99.
+Cada vez que se acciona el botón sumar, muestra el siguiente numero primo.
+
 
 ## Link al proyecto
 - [PROYECTO](https://www.tinkercad.com/things/9bGdDc5tAb0?sharecode=gKVoqApC9xa9Q-Oz-JwA3f67M1zOfP7FezUBNaChvgA) 
