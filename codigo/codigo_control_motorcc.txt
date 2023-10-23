@@ -1,0 +1,221 @@
+#define B 13
+#define A 12
+#define G 10
+#define F 11
+#define E 9
+#define D 8
+#define C 7
+#define PUL_SUMAR 5
+#define PUL_RESTAR 4
+#define PUL_CERO 3
+#define GND_UNI A4
+#define GND_DEC A5
+#define MOTOR 6
+int cont = 0;
+int velocidad_motor = 0;
+//SACA LA DECENA DEL CONTADOR Y LA MUESTRA
+int cuentaDispDec(int num){
+  
+  int dispDec = (num/10)%10;
+  muestraDisplay(dispDec);
+}
+
+//SACA LA UNIDAD DEL CONTADOR Y LA MUESTRA
+int cuentaDispUnidad(int num){
+  
+  int dispUni = num%10;
+  muestraDisplay(dispUni);
+}
+
+//Muestra digito en display
+  int muestraDisplay(int numero) {
+    switch(numero) {
+      
+      case 0:
+            digitalWrite(A,HIGH);
+            digitalWrite(B,HIGH);
+            digitalWrite(C,HIGH);
+            digitalWrite(D,HIGH);
+            digitalWrite(E,HIGH);
+            digitalWrite(F,HIGH);
+            digitalWrite(G,LOW);
+         break;
+       case 1:
+      	 digitalWrite(A,LOW);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,LOW);
+         digitalWrite(E,LOW);
+         digitalWrite(F,LOW);
+         digitalWrite(G,LOW);
+      
+ 
+         break; 
+       case 2:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,LOW);
+         digitalWrite(D,HIGH);
+         digitalWrite(E,HIGH);
+         digitalWrite(F,LOW);
+         digitalWrite(G,HIGH);
+         break;
+       case 3:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,HIGH);
+         digitalWrite(E,LOW);
+         digitalWrite(F,LOW);
+         digitalWrite(G,HIGH);
+         break;
+       case 4:
+         digitalWrite(A,LOW);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,LOW);
+         digitalWrite(E,LOW);
+         digitalWrite(F,HIGH);
+         digitalWrite(G,HIGH);
+         break;
+       case 5:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,LOW);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,HIGH);
+         digitalWrite(E,LOW);
+         digitalWrite(F,HIGH);
+         digitalWrite(G,HIGH);
+         break;
+       case 6:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,LOW);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,HIGH);
+         digitalWrite(E,HIGH);
+         digitalWrite(F,HIGH);
+         digitalWrite(G,HIGH);
+         break;
+       case 7:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,LOW);
+         digitalWrite(E,LOW);
+         digitalWrite(F,LOW);
+         digitalWrite(G,LOW);
+         break;
+       case 8:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,HIGH);
+         digitalWrite(E,HIGH);
+         digitalWrite(F,HIGH);
+         digitalWrite(G,HIGH);
+         break;
+       case 9:
+         digitalWrite(A,HIGH);
+         digitalWrite(B,HIGH);
+         digitalWrite(C,HIGH);
+         digitalWrite(D,LOW);
+         digitalWrite(E,LOW);
+         digitalWrite(F,HIGH);
+         digitalWrite(G,HIGH);
+         break;
+   	   }
+  
+  	}
+void setup()
+{
+//SETEO DE PINES
+  Serial.begin(9600);
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(PUL_SUMAR, INPUT_PULLUP);
+  pinMode(PUL_CERO, INPUT_PULLUP);
+  pinMode(PUL_RESTAR, INPUT_PULLUP);
+  pinMode(GND_DEC, OUTPUT);
+  pinMode(GND_UNI, OUTPUT);
+  pinMode(MOTOR,OUTPUT);
+
+}
+
+
+void loop()
+{
+  
+  //LEE EL PULSADOR Y SI ES PULSADO ESPERA A QUE SE SUELTE
+  //LUEGO REALIZA EL AUMENTO DEL CONTADOR
+  if (digitalRead(PUL_SUMAR) == 0){
+    while(!digitalRead(PUL_SUMAR)){
+      //ANTI REBOTE DE SUMA, 
+      //ALTERNA APAGADO Y ENCENDIDO DE LOS DOS DISPLAYS
+       cuentaDispUnidad(cont);
+  	   digitalWrite(GND_UNI,LOW);
+       delay(10);
+  	   digitalWrite(GND_UNI,HIGH);
+  	   cuentaDispDec(cont);
+  	   digitalWrite(GND_DEC,LOW);
+  	   delay(10);
+  	   digitalWrite(GND_DEC,HIGH);
+    
+    };
+    cont++;
+    //CONTROL DE MOTOR CC SUMA
+    if (velocidad_motor >= 255)
+    {
+      velocidad_motor = 0;    
+    }
+    velocidad_motor = velocidad_motor + 2,57;
+    analogWrite(MOTOR,velocidad_motor);
+    
+    if (cont > 99){
+    	cont = 0;
+    }
+    
+  }
+  //LEE EL PULSADOR Y SI ES PULSADO ESPERA A QUE SE SUELTE
+  //LUEGO REALIZA EL DECREMENTO DEL CONTADOR
+  if (digitalRead(PUL_RESTAR) == 0){
+    while(!digitalRead(PUL_RESTAR)){//ANTI REBOTE DE SUMA
+       cuentaDispUnidad(cont);
+  	   digitalWrite(GND_UNI,LOW);
+       delay(10);
+  	   digitalWrite(GND_UNI,HIGH);
+  	   cuentaDispDec(cont);
+  	   digitalWrite(GND_DEC,LOW);
+  	   delay(10);
+  	   digitalWrite(GND_DEC,HIGH);
+    
+    };
+   //SI EL CONTADOR LLEGA A MENOS QUE 99 SETEA A 0
+    cont--;
+   //CONTROL DE MOTOR CC RESTA
+    if (velocidad_motor < 0)
+    {
+      velocidad_motor = 255;    
+    }
+    velocidad_motor = velocidad_motor - 2,57;
+    analogWrite(MOTOR,velocidad_motor);
+    
+    if (cont < 0){
+    	cont = 99;
+    }
+  }
+  
+  //ALTERNA APAGADO Y ENCENDIDO DE LOS DOS DISPLAYS
+  cuentaDispUnidad(cont);
+  digitalWrite(GND_UNI,LOW);
+  delay(10);
+  digitalWrite(GND_UNI,HIGH);
+  cuentaDispDec(cont);
+  digitalWrite(GND_DEC,LOW);
+  delay(10);
+  digitalWrite(GND_DEC,HIGH);
+}
