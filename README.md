@@ -288,7 +288,7 @@ Reemplazé el switch de contador primo, con el LDR este mismo al recibir luz sol
 
 Podria hacerse al revés, que cuando no reciba luz solar se vaya prendiendo o se prenda.
 
-foto-
+![Tinkercad](./img/PARTE_3.png)
 ~~~C
 {
       //LIMITES DEL LDR: 54MIN 974MAX
