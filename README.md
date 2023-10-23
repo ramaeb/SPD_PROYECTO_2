@@ -231,9 +231,13 @@ Dicho esto, el motor puede variar su rotacion dependiendo de si en un extremo le
 negativo y viseversa.
 Ademas, el motor de cc puede variar su velocidad de rotacion dependiendo de cuanto ancho de pulso nosotros le enviemos mediante pwm por el pin de arduino.
 
+![Tinkercad](./img/motorcc_circuito.png)
 
 ### Motor CC aplicado en el contador
 Aplicando el uso de pwm subimos la velocidad del motor mostrando numeros del 0 al 99, lo mismo con el botón de restar.
-- foto
-- [MOTORCC](https://www.tinkercad.com/things/ezhMjHselsI?sharecode=eaGsicF5UsC8CU-rVPNWVja8EhKVKGN6dtYL74VTGeU)
+![Tinkercad](./img/motorcito.png) ![Tinkercad](./img/motorcito_2.png)
+
+
+- [LINK AL PROYECTO MOTOR ](https://www.tinkercad.com/things/ezhMjHselsI?sharecode=eaGsicF5UsC8CU-rVPNWVja8EhKVKGN6dtYL74VTGeU)
+
 
