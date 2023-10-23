@@ -310,5 +310,5 @@ Podria hacerse al revés, que cuando no reciba luz solar se vaya prendiendo o se
     }
 ~~~
 ----------------------------------------------------------------------------------------------------------
-- [LDR](https://www.tinkercad.com/things/9CYrrDC5hTX?sharecode=w8InRzYIwiOA2kTDQ5Aibg1sOQ97qTfPVb2YIBLzNkU)
+- [LDR](https://www.tinkercad.com/things/3BCPzPvaTsg?sharecode=XcZnHakA8kFMxFJPKN917suBZ43f7_RKARRzQGfzTi0)
 ----------------------------------------------------------------------------------------------------------
