@@ -253,8 +253,6 @@ Entonces si el arduino devuelve en una escala de 5v 1023 valores, la cuenta seri
 ~~~C
 void loop()
 {
- 
-  
   //LECTURA DEL SENSOR
   tempC = analogRead(SENSOR);
   //Conversión del sensor
@@ -279,3 +277,38 @@ void loop()
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 - [SENSOR](https://www.tinkercad.com/things/lb6Luj8DZVl?sharecode=RQRTuOHvYMlBNClVQ3VJV77yGBIXMdN_3xYEeUWaYhw)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# PARTE 3
+## Contador de dos segmentos + control de brillo de led con ldr.
+
+Mezclé el ldr con el control pwm para un led, podria agregarse un motor en vez del led pero en este caso como más visual elegí directamente un led.
+Reemplazé el switch de contador primo, con el LDR este mismo al recibir luz solar, encendería el led
+- Valores minimos entrega analog read LRD: 54
+- Valores maximos entrega analog read LRD: 974
+
+Podria hacerse al revés, que cuando no reciba luz solar se vaya prendiendo o se prenda.
+
+foto-
+~~~C
+{
+      //LIMITES DEL LDR: 54MIN 974MAX
+      lectura = analogRead(LDR);
+      Serial.println(lectura);
+      //MITAD DEL LED PRENDIDO
+      if (lectura <= 865)
+      {
+        analogWrite(LED, 10);
+      }
+      if (lectura >= 937)
+      {
+        analogWrite(LED, 100);
+      }
+      if (lectura >= 974)
+      {
+        analogWrite(LED, 255);
+      }
+    }
+~~~
+----------------------------------------------------------------------------------------------------------
+- [LDR](https://www.tinkercad.com/things/9CYrrDC5hTX?sharecode=w8InRzYIwiOA2kTDQ5Aibg1sOQ97qTfPVb2YIBLzNkU)
+----------------------------------------------------------------------------------------------------------
